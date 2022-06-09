@@ -6,7 +6,7 @@ const express = require('express'),
 const app = express();
 // create a write stream (in append mode)
 // a ‘log.txt’ file is created in root directory
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { flags: 'a' });
 
 //Top movies list
 let topMovies = [
@@ -23,7 +23,7 @@ let topMovies = [
     year: '2008',
   },
   {
-    title: "The Godfather Part II",
+    title: 'The Godfather Part II',
     year: '1974',
   },
   {
@@ -35,7 +35,7 @@ let topMovies = [
     year: '1993',
   },
   {
-    title: "The Lord of the Rings: The Return of the King",
+    title: 'The Lord of the Rings: The Return of the King',
     year: '2003',
   },
   {
@@ -59,21 +59,21 @@ app.get('/', (req, res) => {
 
 //Specifying root: __dirname with express.static instead of url and fs
 app.get('/documentation', (req, res) => {
-    res.sendFile('/public/documentation.html', { root: __dirname });
+  res.sendFile('/public/documentation.html', { root: __dirname });
 });
 
 app.get('/movies', (req, res) => {
-    res.json(topMovies)
+  res.json(topMovies);
 });
 
 //Middleware functions
-app.use(morgan('combined', {stream: accessLogStream})); //Logger set up
+app.use(morgan('combined', { stream: accessLogStream })); //Logger set up
 
 app.use(express.static('public')); //Automatically route all request for static files to public folder
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Oops, Something went wrong!');
+  console.error(err.stack);
+  res.status(500).send('Oops, Something went wrong!');
 });
 
 //Listen for requests
