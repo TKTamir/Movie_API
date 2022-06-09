@@ -67,8 +67,14 @@ app.get('/movies', (req, res) => {
 });
 
 //Middleware functions
+app.use(morgan('combined', {stream: accessLogStream})); //Logger set up
+
 app.use(express.static('public')); //Automatically route all request for static files to public folder
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Oops, Something went wrong!');
+});
 //Listen for requests
 app.listen(8080, () => {
   console.log('Your app is listening on port 8080.');
