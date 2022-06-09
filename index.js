@@ -1,8 +1,14 @@
 const express = require('express'),
-  morgan = require('morgan');
+  morgan = require('morgan'),
+  fs = require('fs'), //Import build in node modules fs and path
+  path = require('path');
 
 const app = express();
+// create a write stream (in append mode)
+// a ‘log.txt’ file is created in root directory
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
+//Top movies list
 let topMovies = [
   {
     title: 'The Shawshank Redemption',
@@ -51,13 +57,17 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Movies API');
 });
 
+//Specifying root: __dirname with express.static instead of url and fs
 app.get('documentation', (req, res) =>{
-    res.sendFile('public/documentation.html', { root: __dirname});
+    res.sendFile('public/documentation.html', { root: __dirname}); 
 });
 
 app.get('/movies', (req, res) => {
     res.json(topMovies)
 });
+
+//Middleware functions
+app.use(express.static('public')); //Automatically route all request for static files to public folder
 
 //Listen for requests
 app.listen(8080, () => {
