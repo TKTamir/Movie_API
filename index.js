@@ -1,7 +1,7 @@
 const express = require('express'),
 app = express(),
 bodyParser = require('body-parser'),
-uuid = require('uuid'),
+uuid = require('uuid');
 morgan = require('morgan');
 
 
@@ -203,7 +203,8 @@ app.delete('/users/:id/movieTitle', (req, res) => {
     res.status(400).send('Please enter a valid user name');
 
   }
-})
+});
+
 //DELETE- delete- Delete a user
 app.delete('/users/:id', (req, res) => {
   const { id } = req.params;
