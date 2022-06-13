@@ -157,6 +157,21 @@ app.post('/users', (req, res) => {
   }
 })
 
+//CREATE-post- Add movie to user's favorite movies
+app.post('/users/:id/movieTitle', (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  } else {
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
+
 //UPDATE-put- Update user name
 app.put('/users/:id', (req, res) => {
   const { id } = req.params;
@@ -172,20 +187,7 @@ app.put('/users/:id', (req, res) => {
   }
 })
 
-//CREATE-post- Add movie to user's favorite movies
-app.post('/users/:id/movieTitle', (req, res) => {
-  const { id, movieTitle } = req.params;
 
-  let user = users.find( user => user.id == id );
-
-  if (user) {
-    user.favoriteMovies.push(movieTitle);
-    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
-  } else {
-    res.status(400).send('Please enter a valid user name');
-
-  }
-})
 
 
 
