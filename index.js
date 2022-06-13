@@ -98,7 +98,7 @@ let movies = [
   },
 ];
 
-//CREATE-post
+//CREATE-post- Create a new user
 app.post('/users', (req, res) => {
   const newUser = req.body;
 
@@ -111,7 +111,7 @@ app.post('/users', (req, res) => {
   }
 })
 
-//UPDATE-put
+//UPDATE-put- Update user name
 app.put('/users/:id', (req, res) => {
   const { id } = req.params;
   const updatedUser = req.body;
@@ -126,7 +126,7 @@ app.put('/users/:id', (req, res) => {
   }
 })
 
-//CREATE-post
+//CREATE-post- Add movie to user's favorite movies
 app.post('/users/:id/movieTitle', (req, res) => {
   const { id, movieTitle } = req.params;
 
@@ -140,7 +140,7 @@ app.post('/users/:id/movieTitle', (req, res) => {
 
   }
 })
-//DELETE- delete
+//DELETE- delete- Delete a movie from user's favorite movies
 app.delete('/users/:id/movieTitle', (req, res) => {
   const { id, movieTitle } = req.params;
 
@@ -154,7 +154,7 @@ app.delete('/users/:id/movieTitle', (req, res) => {
 
   }
 })
-//DELETE- delete
+//DELETE- delete- Delete a user
 app.delete('/users/:id', (req, res) => {
   const { id } = req.params;
 
@@ -169,14 +169,14 @@ app.delete('/users/:id', (req, res) => {
   }
 })
 
-//READ-get
+//READ-get- Get all movies
 app.get('/movies', (req, res) =>{
   res.status(200).json(movies);
 
 })
 
 
-//READ Title-get
+//READ Title-get- Get a movie by title
 app.get('/movies/:title', (req , res) => {
   const { title } = req.params;
   const movie = movies.find( movie => movie.title === title);
@@ -188,10 +188,10 @@ app.get('/movies/:title', (req , res) => {
   }
 })
 
-//READ Genre-get
+//READ Genre-get- Get a movie by genre
 app.get('/movies/genre/:genreName', (req , res) => {
   const { genreName } = req.params;
-  const genre = movies.find( movie => movie.genre === genreName ).genre;
+  const genre = movies.find( movie => movie.genre.Name === genreName ).genre;
 
   if (genre) {
     res.status(200).json(genre);
@@ -200,7 +200,7 @@ app.get('/movies/genre/:genreName', (req , res) => {
   }
 })
 
-//READ Directors-get
+//READ Directors-get- Get a movie director
 app.get('/movies/directors/:directorName', (req , res) => {
   const { directorName } = req.params;
   const director = movies.find( movie => movie.director.Name === directorName ).director;
