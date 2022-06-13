@@ -15,11 +15,13 @@ let users = [
   {
     id: 1,
     name: "Jack",
+    password:"",
     favoriteMovies: []
   },
   {
     id: 2,
     name: "Jill",
+    password:"",
     favoriteMovies: ["The Godfather"]
   },
 ]
@@ -98,76 +100,6 @@ let movies = [
   },
 ];
 
-//CREATE-post- Create a new user
-app.post('/users', (req, res) => {
-  const newUser = req.body;
-
-  if (newUser.name) {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).json(newUser)
-  } else {
-      res.status(400).send('Please enter a valid user name')
-  }
-})
-
-//UPDATE-put- Update user name
-app.put('/users/:id', (req, res) => {
-  const { id } = req.params;
-  const updatedUser = req.body;
-
-  let user = users.find( user => user.id == id);
-
-  if(user) {
-     user.name = updatedUser.name;
-     res.status(200).json(user);
-  } else {
-    res.status(400).send('User not found')
-  }
-})
-
-//CREATE-post- Add movie to user's favorite movies
-app.post('/users/:id/movieTitle', (req, res) => {
-  const { id, movieTitle } = req.params;
-
-  let user = users.find( user => user.id == id );
-
-  if (user) {
-    user.favoriteMovies.push(movieTitle);
-    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
-  } else {
-    res.status(400).send('Please enter a valid user name');
-
-  }
-})
-//DELETE- delete- Delete a movie from user's favorite movies
-app.delete('/users/:id/movieTitle', (req, res) => {
-  const { id, movieTitle } = req.params;
-
-  let user = users.find( user => user.id == id );
-
-  if (user) {
-    user.favoriteMovies = user.favoriteMovies.filter( title => title !== movieTitle);
-    res.status(200).send(`${movieTitle} has been removed to user ${id}'s array`);;
-  } else{
-    res.status(400).send('Please enter a valid user name');
-
-  }
-})
-//DELETE- delete- Delete a user
-app.delete('/users/:id', (req, res) => {
-  const { id } = req.params;
-
-  let user = users.find( user => user.id == id );
-
-  if (user) {
-    users = user.filter(user => user.id != id);
-    res.status(200).send(`user ${id} has been deleted`);
-  } else{
-    res.status(400).send('Please enter a valid user name');
-
-  }
-})
 
 //READ-get- Get all movies
 app.get('/movies', (req, res) =>{
@@ -212,6 +144,79 @@ app.get('/movies/directors/:directorName', (req , res) => {
   }
 })
 
+//CREATE-post- Create a new user
+app.post('/users', (req, res) => {
+  const newUser = req.body;
+
+  if (newUser.name) {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).json(newUser)
+  } else {
+      res.status(400).send('Please enter a valid user name')
+  }
+})
+
+//UPDATE-put- Update user name
+app.put('/users/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedUser = req.body;
+
+  let user = users.find( user => user.id == id);
+
+  if(user) {
+     user.name = updatedUser.name;
+     res.status(200).json(user);
+  } else {
+    res.status(400).send('User not found')
+  }
+})
+
+//CREATE-post- Add movie to user's favorite movies
+app.post('/users/:id/movieTitle', (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  } else {
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
+
+
+
+//DELETE- delete- Delete a movie from user's favorite movies
+app.delete('/users/:id/movieTitle', (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    user.favoriteMovies = user.favoriteMovies.filter( title => title !== movieTitle);
+    res.status(200).send(`${movieTitle} has been removed to user ${id}'s array`);;
+  } else{
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
+//DELETE- delete- Delete a user
+app.delete('/users/:id', (req, res) => {
+  const { id } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    users = user.filter(user => user.id != id);
+    res.status(200).send(`user ${id} has been deleted`);
+  } else{
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
 
 app.listen(8080, () => console.log("Listening on 8080"))
 
