@@ -20,6 +20,7 @@ body {
     color: var(--clr-grey-1);
     line-height: 1.5;
     font-size: 0.875rem;
+    text-align: center;
   }
 
 h1,
@@ -32,15 +33,18 @@ h2 {
 }
 h1 {
     font-size: 3rem;
+    
   }
   h2 {
     font-size: 2rem;
   }
   
 .table, th, td{
-    width: 100%;
+    width: 50%;
+    height: 40%;
     border: 1px solid rgba(0, 0, 0, 0.651);
     border-collapse: collapse;
+    margin:auto;
     
   }
 
