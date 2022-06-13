@@ -92,17 +92,6 @@ app.get('/movies', (req, res) =>{
 
 })
 
-//READ
-app.get('/movies/:title', (req , res) => {
-  const { title } = req.params;
-  const movie = movies.find( movie => movie.title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(400).send('Movie not found')
-  }
-})
 
 //READ Title
 app.get('/movies/:title', (req , res) => {
@@ -119,7 +108,7 @@ app.get('/movies/:title', (req , res) => {
 //READ Genre
 app.get('/movies/genre/:genreName', (req , res) => {
   const { genreName } = req.params;
-  const genre = movies.find( movie => movie.Genre.Name === genreName ).Genre;
+  const genre = movies.find( movie => movie.Genre.Name === genreName ).Genre;// MAYBE REMOVE NAME LATER
 
   if (genre) {
     res.status(200).json(genre);
