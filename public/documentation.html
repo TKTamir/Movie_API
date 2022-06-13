@@ -4,12 +4,113 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Movies API</title>
 </head>
 <body>
     <main>
-        <div>Hi! welcome to my Movies API created by Tamir Kahalany.<br>
+        <div><h1>Movies API</h1>
+        Hi! welcome to my Movies API created by Tamir Kahalany.<br>
         This is a REST API connected to a database that stores data abot different movies.
+        </div>
+        <div>
+            <h2>Movies API actions</h2>
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th>Business Logic</th>
+                            <th>URL</th>
+                            <th>HTTP Method</th>
+                            <th>Request body data format</th>
+                            <th>Response body data format</th>
+                        </tr> 
+                    </thead> 
+                    <tbody>
+                        <tr>
+                            <td>Return a list of all movies</td>
+                            <td>/movies</td>
+                            <td>GET</td>
+                            <td>none</td>   
+                            <td>JSON object containing data-Description, genre, director, image URL, featured status </td>
+                        </tr>
+                        <tr>
+                            <td>Return data about a signle title</td>
+                            <td>/movies/:title</td>
+                            <td>GET</td>
+                            <td>none</td>
+                            <td>JSON object containing data about a title-Description, genre, director, image URL, featured status</td>
+                        </tr>
+                        <tr>
+                            <td>Return data about a genre</td>
+                            <td>/movies/genre/:genreName</td>
+                            <td>GET</td>
+                            <td>none</td>
+                            <td>JSON object containing data about a genre</td>
+                        </tr>
+                        <tr>
+                            <td>Return data about a director</td>
+                            <td>/movies/directors/:directorName</td>
+                            <td>GET</td>
+                            <td>none</td>
+                            <td>JSON object containing data about a director-Name, bio, birth year, death year</td>
+                        </tr>
+                        <tr>
+                            <td>Register new user</td>
+                            <td>/users</td>
+                            <td>POST</td>
+                            <td>{
+                                id: ,
+                                name: "",
+                                password:"",
+                                favoriteMovies: []
+                              }</td>
+                              <td>JSON object containig data about a user: <br> {
+                                id: ,
+                                name: "",
+                                password:"",
+                                favoriteMovies: []
+                              }</td>
+                        </tr>
+                        <tr>
+                            <td>Update user data</td>
+                            <td>/users/:id</td>
+                            <td>PUT</td>
+                            <td>none</td>
+                            <td>JSON object containig data about a user: <br> {
+                                id: ,
+                                name: "",
+                                password:"",
+                                favoriteMovies: []
+                            }</td>
+                        </tr>
+                        <tr>
+                            <td>Update user favorite movie</td>
+                            <td>/users/:id/movieTitle</td>
+                            <td>POST</td>
+                            <td>none</td>
+                            <td>JSON object containig data about a user: <br> {
+                                id: ,
+                                name: "",
+                                password:"",
+                                favoriteMovies: []
+                            }</td>
+                        </tr>
+                        <tr>
+                            <td>Remove user's favorite movie</td>
+                            <td>/users/:id/movieTitle</td>
+                            <td>DELETE</td>
+                            <td>none</td>
+                            <td>Text confirming that a movie was removed</td>
+                        </tr>
+                        <tr>
+                            <td>Remove user</td>
+                            <td>/users/:id</td>
+                            <td>DELETE</td>
+                            <td>none</td>
+                            <td>Text confirming that a user was removed</td>
+                        </tr>
+                    </tbody>
+                </table>
         </div>
     </main>
 </body>
