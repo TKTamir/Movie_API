@@ -10,6 +10,19 @@ uuid = require('uuid');
 app.use(bodyParser.json());
 
 
+//Users
+let users = [
+  {
+    id: 1,
+    name: "Jack",
+    favoriteMovies: []
+  },
+  {
+    id: 2,
+    name: "Jill",
+    favoriteMovies: ["The Godfather"]
+  },
+]
 
 //Top movies list
 let movies = [
@@ -85,18 +98,88 @@ let movies = [
   },
 ];
 
+//CREATE-post
+app.post('/users', (req, res) => {
+  const newUser = req.body;
 
-//READ
+  if (newUser.name) {
+    newUser.id = uuid.v4();
+    users.push(newUser);
+    res.status(201).json(newUser)
+  } else {
+      res.status(400).send('Please enter a valid user name')
+  }
+})
+
+//UPDATE-put
+app.put('/users/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedUser = req.body;
+
+  let user = users.find( user => user.id == id);
+
+  if(user) {
+     user.name = updatedUser.name;
+     res.status(200).json(user);
+  } else {
+    res.status(400).send('User not found')
+  }
+})
+
+//CREATE-post
+app.post('/users/:id/movieTitle', (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  } else {
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
+//DELETE- delete
+app.delete('/users/:id/movieTitle', (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    user.favoriteMovies = user.favoriteMovies.filter( title => title !== movieTitle);
+    res.status(200).send(`${movieTitle} has been removed to user ${id}'s array`);;
+  } else{
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
+//DELETE- delete
+app.delete('/users/:id', (req, res) => {
+  const { id } = req.params;
+
+  let user = users.find( user => user.id == id );
+
+  if (user) {
+    users = user.filter(user => user.id != id);
+    res.status(200).send(`user ${id} has been deleted`);
+  } else{
+    res.status(400).send('Please enter a valid user name');
+
+  }
+})
+
+//READ-get
 app.get('/movies', (req, res) =>{
   res.status(200).json(movies);
 
 })
 
 
-//READ Title
+//READ Title-get
 app.get('/movies/:title', (req , res) => {
   const { title } = req.params;
-  const movie = movies.find( movie => movie.Title === title);
+  const movie = movies.find( movie => movie.title === title);
 
   if (movie) {
     res.status(200).json(movie);
@@ -105,10 +188,10 @@ app.get('/movies/:title', (req , res) => {
   }
 })
 
-//READ Genre
+//READ Genre-get
 app.get('/movies/genre/:genreName', (req , res) => {
   const { genreName } = req.params;
-  const genre = movies.find( movie => movie.Genre.Name === genreName ).Genre;// MAYBE REMOVE NAME LATER
+  const genre = movies.find( movie => movie.genre === genreName ).genre;
 
   if (genre) {
     res.status(200).json(genre);
@@ -117,10 +200,10 @@ app.get('/movies/genre/:genreName', (req , res) => {
   }
 })
 
-//READ Directors
+//READ Directors-get
 app.get('/movies/directors/:directorName', (req , res) => {
   const { directorName } = req.params;
-  const director = movies.find( movie => movie.Director.Name === directorName ).Director;
+  const director = movies.find( movie => movie.director.Name === directorName ).director;
 
   if (director) {
     res.status(200).json(director);
