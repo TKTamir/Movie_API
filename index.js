@@ -1,8 +1,8 @@
 const express = require('express'),
 app = express(),
 bodyParser = require('body-parser'),
-uuid = require('uuid');
-// morgan = require('morgan'),
+uuid = require('uuid'),
+morgan = require('morgan');
 // fs = require('fs'), //Import build in node modules fs and path
 // path = require('path');
 
@@ -26,7 +26,7 @@ let users = [
   },
 ]
 
-//Top movies list
+//Top movies list 
 let movies = [
   {
     title: 'The Shawshank Redemption',
@@ -105,7 +105,7 @@ let movies = [
 app.get('/movies', (req, res) =>{
   res.status(200).json(movies);
 
-})
+});
 
 
 //READ Title-get- Get a movie by title
@@ -116,33 +116,33 @@ app.get('/movies/:title', (req , res) => {
   if (movie) {
     res.status(200).json(movie);
   } else {
-    res.status(400).send('Movie not found')
+    res.status(400).send('Movie not found');
   }
-})
+});
 
-//READ Genre-get- Get a movie by genre
+//READ Genre-get- Get movie genre info
 app.get('/movies/genre/:genreName', (req , res) => {
   const { genreName } = req.params;
-  const genre = movies.find( movie => movie.genre.Name === genreName ).genre;
+  const genre = movies.find( movie => movie.genre === genreName ).genre;
 
   if (genre) {
     res.status(200).json(genre);
   } else {
-    res.status(400).send('Genre not found')
+    res.status(400).send('Genre not found');
   }
-})
+});
 
 //READ Directors-get- Get a movie director
 app.get('/movies/directors/:directorName', (req , res) => {
   const { directorName } = req.params;
-  const director = movies.find( movie => movie.director.Name === directorName ).director;
+  const director = movies.find( movie => movie.director === directorName ).director;
 
   if (director) {
     res.status(200).json(director);
   } else {
-    res.status(400).send('Director not found')
+    res.status(400).send('Director not found');
   }
-})
+});
 
 //CREATE-post- Create a new user
 app.post('/users', (req, res) => {
@@ -151,11 +151,11 @@ app.post('/users', (req, res) => {
   if (newUser.name) {
     newUser.id = uuid.v4();
     users.push(newUser);
-    res.status(201).json(newUser)
+    res.status(201).json(newUser);
   } else {
-      res.status(400).send('Please enter a valid user name')
+      res.status(400).send('Please enter a valid user name');
   }
-})
+});
 
 //CREATE-post- Add movie to user's favorite movies
 app.post('/users/:id/movieTitle', (req, res) => {
@@ -183,7 +183,7 @@ app.put('/users/:id', (req, res) => {
      user.name = updatedUser.name;
      res.status(200).json(user);
   } else {
-    res.status(400).send('User not found')
+    res.status(400).send('User not found');
   }
 })
 
@@ -218,9 +218,9 @@ app.delete('/users/:id', (req, res) => {
     res.status(400).send('Please enter a valid user name');
 
   }
-})
+});
 
-app.listen(8080, () => console.log("Listening on 8080"))
+app.listen(8080, () => console.log("Listening on 8080"));
 
 
 
