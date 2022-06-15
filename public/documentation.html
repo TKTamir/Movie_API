@@ -31,14 +31,14 @@
                             <td>/movies</td>
                             <td>GET</td>
                             <td>none</td>   
-                            <td>JSON object containing data-Description, genre, director, image URL, featured status </td>
+                            <td>JSON object containing data-Title, description, release year, runtime, genre(name, description), director(name, bio, birth, death), image URL, featured </td>
                         </tr>
                         <tr>
                             <td>Return data about a signle title</td>
                             <td>/movies/:title</td>
                             <td>GET</td>
                             <td>none</td>
-                            <td>JSON object containing data about a title-Description, genre, director, image URL, featured status</td>
+                            <td>JSON object containing data about a title-Title, description, release year, runtime, genre(name, description), director(name, bio, birth, death), image URL, featured</td>
                         </tr>
                         <tr>
                             <td>Return data about a genre</td>
@@ -60,8 +60,9 @@
                             <td>POST</td>
                             <td>{
                                 id: ,
-                                name: "",
+                                username: "",
                                 password:"",
+                                email:"",
                                 favoriteMovies: []
                               }</td>
                               <td>JSON object containig data about a user: <br> {
@@ -78,8 +79,9 @@
                             <td>none</td>
                             <td>JSON object containig data about a user: <br> {
                                 id: ,
-                                name: "",
+                                username: "",
                                 password:"",
+                                email:"",
                                 favoriteMovies: []
                             }</td>
                         </tr>
@@ -90,8 +92,9 @@
                             <td>none</td>
                             <td>JSON object containig data about a user: <br> {
                                 id: ,
-                                name: "",
+                                username: "",
                                 password:"",
+                                email:"",
                                 favoriteMovies: []
                             }</td>
                         </tr>
