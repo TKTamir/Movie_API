@@ -4,6 +4,11 @@ bodyParser = require('body-parser'),
 uuid = require('uuid');
 morgan = require('morgan');
 
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
+mongoose.connect('mongodb://localhost:27017/MyMoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 app.use(bodyParser.json());
