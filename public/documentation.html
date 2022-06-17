@@ -35,21 +35,28 @@
                         </tr>
                         <tr>
                             <td>Return data about a signle title</td>
-                            <td>/movies/:title</td>
+                            <td>/movies/:Title</td>
                             <td>GET</td>
                             <td>none</td>
                             <td>JSON object containing data about a title-Title, description, release year, runtime, genre(name, description), director(name, bio, birth, death), image URL, featured</td>
                         </tr>
                         <tr>
                             <td>Return data about a genre</td>
-                            <td>/movies/genre/:genreName</td>
+                            <td>/movies/genre/:Name</td>
                             <td>GET</td>
                             <td>none</td>
                             <td>JSON object containing data about a genre</td>
                         </tr>
                         <tr>
                             <td>Return data about a director</td>
-                            <td>/movies/directors/:directorName</td>
+                            <td>/movies/director/:Name</td>
+                            <td>GET</td>
+                            <td>none</td>
+                            <td>JSON object containing data about a director-Name, bio, birth year, death year</td>
+                        </tr>
+                        <tr>
+                            <td>Return data about a user</td>
+                            <td>/users</td>
                             <td>GET</td>
                             <td>none</td>
                             <td>JSON object containing data about a director-Name, bio, birth year, death year</td>
@@ -63,31 +70,21 @@
                                 username: "",
                                 password:"",
                                 email:"",
+                                birthdate,
                                 favoriteMovies: []
                               }</td>
                               <td>JSON object containig data about a user: <br> {
                                 id: ,
-                                name: "",
+                                username: "",
                                 password:"",
+                                email:"",
+                                birthdate,
                                 favoriteMovies: []
                               }</td>
                         </tr>
                         <tr>
-                            <td>Update user data</td>
-                            <td>/users/:id</td>
-                            <td>PUT</td>
-                            <td>none</td>
-                            <td>JSON object containig data about a user: <br> {
-                                id: ,
-                                username: "",
-                                password:"",
-                                email:"",
-                                favoriteMovies: []
-                            }</td>
-                        </tr>
-                        <tr>
                             <td>Update user favorite movie</td>
-                            <td>/users/:id/movieTitle</td>
+                            <td>/users/:Username/Movies/:MovieID</td>
                             <td>POST</td>
                             <td>none</td>
                             <td>JSON object containig data about a user: <br> {
@@ -95,19 +92,40 @@
                                 username: "",
                                 password:"",
                                 email:"",
+                                birthdate,
                                 favoriteMovies: []
                             }</td>
                         </tr>
                         <tr>
+                            <td>Update user data</td>
+                            <td>/users/:Username</td>
+                            <td>PUT</td>
+                            <td>id: ,
+                                username: "",
+                                password:"",
+                                email:"",
+                                birthdate,
+                                favoriteMovies: []</td>
+                            <td>JSON object containig data about a user: <br> {
+                                id: ,
+                                username: "",
+                                password:"",
+                                email:"",
+                                birthdate,
+                                favoriteMovies: []
+                            }</td>
+                        </tr>
+                        
+                        <tr>
                             <td>Remove user's favorite movie</td>
-                            <td>/users/:id/movieTitle</td>
+                            <td>/users/:Username/movies/:MovieID</td>
                             <td>DELETE</td>
                             <td>none</td>
                             <td>Text confirming that a movie was removed</td>
                         </tr>
                         <tr>
                             <td>Remove user</td>
-                            <td>/users/:id</td>
+                            <td>/users/:Username</td>
                             <td>DELETE</td>
                             <td>none</td>
                             <td>Text confirming that a user was removed</td>
