@@ -17,8 +17,14 @@ mongoose.connect('mongodb://localhost:27017/MyMoviesDB', { useNewUrlParser: true
 
 //READ-get- Get all movies
 app.get('/movies', (req, res) =>{
-  res.status(200).json(movies);
-
+  Movies.find()
+  .then((movies) => {
+    res.status(201).json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 
@@ -58,28 +64,8 @@ app.get('/movies/directors/:directorName', (req , res) => {
   }
 });
 
+
 //CREATE-post- Add a new user
-// app.post('/users', (req, res) => {
-//   const newUser = req.body;
-
-//   if (newUser.name) {
-//     newUser.id = uuid.v4();
-//     users.push(newUser);
-//     res.status(201).json(newUser);
-//   } else {
-//       res.status(400).send('Please enter a valid user name');
-//   }
-// });
-
-//CREATE- post- Add a user
-/* We’ll expect JSON in this format
-{
-  ID: Integer,
-  Username: String,
-  Password: String,
-  Email: String,
-  Birthday: Date
-}*/
 app.post('/users', (req, res) => {
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
