@@ -1,6 +1,9 @@
 const express = require('express'),
 app = express(),
-bodyParser = require('body-parser'),
+bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 uuid = require('uuid');
 morgan = require('morgan');
 
@@ -11,7 +14,7 @@ const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/MyMoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-app.use(bodyParser.json());
+
 
 
 //Users
