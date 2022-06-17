@@ -1,14 +1,15 @@
 const express = require('express'),
-app = express(),
-bodyParser = require('body-parser');
+bodyParser = require('body-parser'),
+uuid = require('uuid');
+
+const morgan = require('morgan');
+const app = express();
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-uuid = require('uuid');
-morgan = require('morgan');
-
-const mongoose = require('mongoose');
-const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/MyMoviesDB', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -57,17 +58,52 @@ app.get('/movies/directors/:directorName', (req , res) => {
   }
 });
 
-//CREATE-post- Create a new user
-app.post('/users', (req, res) => {
-  const newUser = req.body;
+//CREATE-post- Add a new user
+// app.post('/users', (req, res) => {
+//   const newUser = req.body;
 
-  if (newUser.name) {
-    newUser.id = uuid.v4();
-    users.push(newUser);
-    res.status(201).json(newUser);
-  } else {
-      res.status(400).send('Please enter a valid user name');
-  }
+//   if (newUser.name) {
+//     newUser.id = uuid.v4();
+//     users.push(newUser);
+//     res.status(201).json(newUser);
+//   } else {
+//       res.status(400).send('Please enter a valid user name');
+//   }
+// });
+
+//CREATE- post- Add a user
+/* We’ll expect JSON in this format
+{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}*/
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
 //CREATE-post- Add movie to user's favorite movies
