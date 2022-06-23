@@ -11,6 +11,9 @@ const e = require('express');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const { check, validationResult } = require('express-validator');
+
+
 //Define CORS
 const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
@@ -104,7 +107,12 @@ app.get('/users', passport.authenticate('jwt', { session: false }), function (re
 });
 
 //CREATE-post- Add a new user
-app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users',  [
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], passport.authenticate('jwt', { session: false }), (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -152,7 +160,12 @@ app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', { sess
 });
 
 //UPDATE-put- Update user info
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username',  [
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+], passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
