@@ -41,7 +41,7 @@ const Users = Models.User;
 //   useUnifiedTopology: true,
 // });
 
-mongoose.connect('mongodb+srv://themovieguy:thepasswordguy@mymoviesdb.ee8zf.mongodb.net/MyMoviesDB?retryWrites=true&w=majority', {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
