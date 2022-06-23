@@ -36,10 +36,16 @@ require('./passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/MyMoviesDB', {
+// mongoose.connect('mongodb://localhost:27017/MyMoviesDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+mongoose.connect('mongodb+srv://themovieguy:thepasswordguy@mymoviesdb.ee8zf.mongodb.net/MyMoviesDB?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
 
 //Default text response on '/'
 app.get('/', (req, res) => {
@@ -234,6 +240,7 @@ app.use((err, req, res, next) => {
 
 
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0', () => {
-  console.log('Listening on Port ' + port);
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
 });
+
