@@ -268,7 +268,7 @@ app.get('/documentation', function (req, res) {
 });
 
 //Access Stylesheet through express.static
-app.get('/documentation', function (req, res) {
+app.get('/public', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/styles.css'));
 });
 
