@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
-      res.status(201).json(movies);
+      res.status(200).json(movies);
     })
     .catch((err) => {
       console.error(err);
@@ -107,7 +107,7 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false 
 app.get('/users', passport.authenticate('jwt', { session: false }), function (req, res) {
   Users.find()
     .then(function (users) {
-      res.status(201).json(users);
+      res.status(200).json(users);
     })
     .catch(function (err) {
       console.error(err);
@@ -253,7 +253,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
       if (!user) {
         res.status(400).send(req.params.Username + ' was not found');
       } else {
-        res.status(200).send(req.params.Username + ' was deleted');
+        res.status(201).send(req.params.Username + ' was deleted');
       }
     })
     .catch((err) => {
