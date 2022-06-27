@@ -2,6 +2,12 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   uuid = require('uuid');
 path = require('path');
+const Movies = Models.Movie;
+const Users = Models.User;
+const cors = require('cors');
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+const passport = require('passport');
+require('./passport');
 
 const morgan = require('morgan');
 const app = express();
@@ -13,10 +19,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const { check, validationResult } = require('express-validator');
-
-//Define CORS
-const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
 app.use(
   cors({
@@ -33,12 +35,7 @@ app.use(
   })
 );
 
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
-
-const Movies = Models.Movie;
-const Users = Models.User;
+require('./auth')(app);
 
 // mongoose.connect('mongodb://localhost:27017/MyMoviesDB', {
 //   useNewUrlParser: true,
