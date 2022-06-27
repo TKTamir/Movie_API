@@ -1,6 +1,7 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
   uuid = require('uuid');
+path = require('path');
 
 const morgan = require('morgan');
 const app = express();
@@ -262,7 +263,9 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 //Access documentation.html through express.static
-app.use('/documentation', express.static('public'));
+app.get('/documentation', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/documentation.html'));
+});
 
 //Error handling
 app.use((err, req, res, next) => {
