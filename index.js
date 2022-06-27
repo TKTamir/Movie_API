@@ -267,6 +267,11 @@ app.get('/documentation', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/documentation.html'));
 });
 
+//Access Stylesheet through express.static
+app.get('/documentation', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/styles.css'));
+});
+
 //Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
