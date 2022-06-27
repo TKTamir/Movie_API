@@ -263,9 +263,12 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 //Access documentation.html through express.static
-app.get('/public', function (req, res) {
+app.get('/documentation', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/documentation.html'));
 });
+
+//Access Stylesheets.css
+app.use(express.static(__dirname + '/public/'));
 
 //Error handling
 app.use((err, req, res, next) => {
