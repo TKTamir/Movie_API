@@ -7,6 +7,7 @@ let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 const passport = require('passport');
 require('./passport');
 const Models = require('./models.js');
+
 const Movies = Models.Movie;
 const Users = Models.User;
 
