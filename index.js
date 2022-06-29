@@ -2,12 +2,12 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   uuid = require('uuid');
 path = require('path');
-const Movies = Models.Movie;
-const Users = Models.User;
 const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 const passport = require('passport');
 require('./passport');
+const Movies = Models.Movie;
+const Users = Models.User;
 
 const morgan = require('morgan');
 const app = express();
