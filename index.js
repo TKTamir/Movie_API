@@ -6,13 +6,13 @@ const cors = require('cors');
 let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 const passport = require('passport');
 require('./passport');
+const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
 const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');
-const Models = require('./models.js');
 const e = require('express');
 
 app.use(bodyParser.json());
