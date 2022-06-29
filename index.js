@@ -5,7 +5,7 @@ path = require('path');
 const Movies = Models.Movie;
 const Users = Models.User;
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
 const passport = require('passport');
 require('./passport');
 
