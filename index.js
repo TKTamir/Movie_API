@@ -53,28 +53,15 @@ app.get('/', (req, res) => {
   res.send('Welcome to MyFlix');
 });
 
-//READ-get- Get all movies
-// app.get('/movies', passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     Movies.find()
-//       .then((movies) => {
-//         res.status(200).json(movies);
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//         res.status(500).send('Error: ' + err);
-//       });
-//   });
-
-//TEMPORARY READ-get- Get all movies
-app.get('/movies', function (req, res) {
+// READ-get- Get all movies
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
-    .then(function (movies) {
+    .then((movies) => {
       res.status(200).json(movies);
     })
-    .catch(function (error) {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
     });
 });
 
