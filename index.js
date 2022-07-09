@@ -101,9 +101,21 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false 
     });
 });
 
-//READ Users - Get a user info
+//READ Users - Get all users info
 app.get('/users', passport.authenticate('jwt', { session: false }), function (req, res) {
   Users.find()
+    .then(function (users) {
+      res.status(200).json(users);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
+//READ Users - Get a user info
+app.get('/users/:Name', passport.authenticate('jwt', { session: false }), function (req, res) {
+  Users.findOne({ Username: req.body.Username })
     .then(function (users) {
       res.status(200).json(users);
     })
