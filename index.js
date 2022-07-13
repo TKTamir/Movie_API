@@ -6,7 +6,7 @@ const cors = require('cors');
 let allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:1234',
-  'https://main--appformovies.netlify.app/',
+  'https://appformovies.netlify.app',
 ];
 const passport = require('passport');
 require('./passport');
