@@ -3,7 +3,11 @@ const express = require('express'),
   uuid = require('uuid');
 path = require('path');
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234'];
+let allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:1234',
+  'https://main--spotflix.netlify.app/',
+];
 const passport = require('passport');
 require('./passport');
 const Models = require('./models.js');
