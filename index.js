@@ -4,9 +4,9 @@ const express = require('express'),
 path = require('path');
 const cors = require('cors');
 let allowedOrigins = [
-  'http://localhost:8080',
-  'http://localhost:1234',
-  'https://appformovies.netlify.app, https://main--appformovies.netlify.app/register',
+  // 'http://localhost:8080',
+  // 'http://localhost:1234',
+  // 'https://appformovies.netlify.app, https://main--appformovies.netlify.app/register',
 ];
 const passport = require('passport');
 require('./passport');
