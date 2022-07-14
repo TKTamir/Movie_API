@@ -1,5 +1,6 @@
 # Movie_API
-This is my API.. (Placeholder)
+Welcome to the Movies_API, with this API you can get data about Movies, Directors and genres.
+
 
 
 ## Tech Tools
