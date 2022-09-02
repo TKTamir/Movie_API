@@ -8,6 +8,7 @@ let allowedOrigins = [
   'http://localhost:1234',
   'https://appformovies.netlify.app',
   'http://localhost:4200',
+  'https://tktamir.github.io',
 ];
 const passport = require('passport');
 require('./passport');
